@@ -3,12 +3,25 @@ require 'open-uri'
 
 #TODO: split models into search and company
 
-class Company < ActiveRecord::Base
-  
-  attr_accessible :name, :organization_number, :search_term
+class Company
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
+
+  #TODO: add rankings of results
+  attr_accessor :name, :organization_number, :search_term
   validates :name, :presence => true
   validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/}
   
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+  
+  def persisted?
+    false
+  end
   
   def self.search(search_parameters)
     #TODO: move to appropriate place
@@ -62,16 +75,16 @@ class Company < ActiveRecord::Base
     raise "incorrect size for id" unless id.size == 10
     raise "id is not valid - does not contain numbers" if id[0..5].match(/^\d+$/).nil?
     
-    company = Company.new(:name => element['title'])
-    company.search_term = name
-    company.organization_number =
+    company = {:name => element['title']}
+    company[:search_term] = name
+    company[:organization_number] =
       if id[6..9].match(/^\d+$/).nil?
         "#{id[0..5]}-XXXX"
       else
         "#{id[0..5]}-#{id[6..9]}"
       end
     
-    company.save
+    # company.save
     return company
   end
 end

@@ -1,4 +1,6 @@
 AllaBolag::Application.routes.draw do
+  
+  #TODO: more limited routing
   resources :companies
 
 

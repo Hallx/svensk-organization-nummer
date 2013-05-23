@@ -24,7 +24,6 @@ class CompanyTest < ActiveSupport::TestCase
     
     assert_not_nil(companies)
     assert_not_nil(companies.first)
-    assert(companies.first.valid?)
     assert_equal("apoex ab", companies.first[:name].downcase!)
   end
   
@@ -43,9 +42,8 @@ class CompanyTest < ActiveSupport::TestCase
     assert_not_nil(companies.first)
     
     kentor = companies.first
-    assert(kentor.valid?)
-    assert_equal("kentor it ab", kentor.name.downcase!)
-    assert_equal("556284-2319", kentor.organization_number)
+    assert_equal("kentor it ab", kentor[:name].downcase)
+    assert_equal("556284-2319", kentor[:organization_number])
 
   end
 end
