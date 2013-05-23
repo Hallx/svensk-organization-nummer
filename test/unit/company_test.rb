@@ -7,7 +7,7 @@ class CompanyTest < ActiveSupport::TestCase
     companies = Company.search(nil)
     
     assert_not_nil(companies)
-    assert(companies.first.valid?)
+    assert(companies.empty?)
   end
   
   test "search parameter is already in database" do
@@ -15,19 +15,17 @@ class CompanyTest < ActiveSupport::TestCase
     
     assert_not_nil(companies)
     assert_not_nil(companies.first)
-    assert(companies.first.valid?)
-    assert_equal("mystring2", companies.first.name.downcase!)
-    assert_not_equal(Company.all.size, companies.size)
+    assert_not_nil(companies.first[:name])
+    assert_equal("mystring2", companies.first[:name].downcase)
   end
   
   test "search parameter is not in database but is on allabolag" do
-    companies = Company.search("apoex ab")
+    companies = Company.search("apoEx ab")
     
     assert_not_nil(companies)
     assert_not_nil(companies.first)
     assert(companies.first.valid?)
-    assert_equal("apoex ab", companies.first.name.downcase!)
-    assert_not_equal(Company.all.size, companies.size)
+    assert_equal("apoex ab", companies.first[:name].downcase!)
   end
   
   test "search parameter is not in database and isnt valid on allabolag" do  

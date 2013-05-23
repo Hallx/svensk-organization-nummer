@@ -4,38 +4,38 @@ require 'open-uri'
 #TODO: split models into search and company
 
 class Company < ActiveRecord::Base
-  belongs_to :search
   
   attr_accessible :name, :organization_number, :search_term
   validates :name, :presence => true
-  validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/} 
+  validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/}
   
- 
+  
   def self.search(search_parameters)
-    if search_parameters
-      search_parameters.downcase!
-      companies = find(:all, :conditions => ['search_term = ?', "#{search_parameters}"])
-      
-      if companies.empty?
-        get_companies_from_alla_bolag(search_parameters)
-        companies = find(:all, :conditions => ['search_term = ?', "#{search_parameters}"])
-      else
-        return companies
-      end
-    else
-      find(:all)
+    #TODO: move to appropriate place
+    return [] if search_parameters.blank?    
+    search_parameters.downcase!
+    
+    cached_result = CachedResult.where(:search_term => search_parameters).first
+    if cached_result.nil? || cached_result.created_at < 1.week.ago
+      companies = get_companies_from_alla_bolag(search_parameters)
+      CachedResult.create!(:search_term => search_parameters, :result => companies)
+      cached_result = CachedResult.where(:search_term => search_parameters).first
     end
+    return cached_result.result
   end
+  
   
   def self.get_companies_from_alla_bolag(name)
     begin
+      companies = []
       puts uri_name = URI.escape(name.split.join("+"))
       document = Nokogiri::HTML(open("http://www.allabolag.se/?what=#{uri_name}"))
       
       position = 0
       document.xpath('//*[@id="hitlistName"]/a').each do |element|
-        process_company(element, name, position = position + 1)
+        companies.push(process_company(element, name, position = position + 1))
       end
+      return companies
     # rescue
       # #TODO: some error handling
       # raise "error in parsing the search page"

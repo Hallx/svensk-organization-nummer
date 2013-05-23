@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  search_term: MyString
-  result: MyString
+  :search_term: mystring
+  :result: 
+    - :name: MyString
+      :organization_number: 123456-7890
 
 two:
-  search_term: MyString
-  result: MyString
+  :search_term: g2
+  :result: 
+    - :name: MyString2
+      :organization_number: 098765-XXXX

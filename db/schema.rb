@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522223128) do
+ActiveRecord::Schema.define(:version => 20130523083540) do
+
+  create_table "cached_results", :force => true do |t|
+    t.string   "search_term"
+    t.text     "result"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "name"
