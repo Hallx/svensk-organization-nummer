@@ -43,6 +43,7 @@ class CompanyTest < ActiveSupport::TestCase
     
     kentor = companies.first
     assert_equal("kentor it ab", kentor[:name].downcase)
+    assert_equal(1, kentor[:rank])
     assert_equal("556284-2319", kentor[:organization_number])
 
   end

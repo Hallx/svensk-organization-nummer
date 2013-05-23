@@ -9,9 +9,9 @@ class Company
   extend ActiveModel::Naming
 
   #TODO: add rankings of results
-  attr_accessor :name, :organization_number, :search_term
-  validates :name, :presence => true
-  validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/}
+  # attr_accessor :name, :organization_number, :search_term, :rank
+  # validates :name, :presence => true
+  # validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/}
   
   def initialize(attributes = {})
     attributes.each do |name, value|
@@ -77,14 +77,14 @@ class Company
     
     company = {:name => element['title']}
     company[:search_term] = name
+    company[:rank] = position
     company[:organization_number] =
       if id[6..9].match(/^\d+$/).nil?
         "#{id[0..5]}-XXXX"
       else
         "#{id[0..5]}-#{id[6..9]}"
       end
-    
-    # company.save
+
     return company
   end
 end
