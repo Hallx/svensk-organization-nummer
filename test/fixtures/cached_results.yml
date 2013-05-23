@@ -5,9 +5,12 @@ one:
   :result: 
     - :name: MyString
       :organization_number: 123456-7890
+      :rank: 5
+
 
 two:
   :search_term: g2
   :result: 
     - :name: MyString2
       :organization_number: 098765-XXXX
+      :rank: 1

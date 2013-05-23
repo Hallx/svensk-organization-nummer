@@ -5,12 +5,13 @@ class WebService
   def self.get_companies(search_term)
     begin
       companies = []
-      puts uri_name = URI.escape(search_term.split.join("+"))
+      uri_name = URI.escape(search_term.split.join("+"))
       document = Nokogiri::HTML(open("http://www.allabolag.se/?what=#{uri_name}"))
       
       position = 0
       document.xpath('//*[@id="hitlistName"]/a').each do |element|
-        companies.push(process_company(element, search_term, position = position + 1))
+        company = process_company(element, search_term, position = position + 1)
+        companies.push(company) unless company.nil?
       end
       return companies
     # rescue
@@ -23,15 +24,14 @@ class WebService
   
   def self.process_company(element, search_term, position)
     #verify
-    unless element.keys.size == 2
+    if (element.keys.size != 2 || !element.keys.include?('title') || !element.keys.include?('href'))
       if position < 2
         raise "error getting to the correct element" 
       else
-        return
+        return nil
       end
     end
-    puts "element name returned is #{element['title']}"
-    # raise "name mismatch/not found" unless element['title'].downcase == name.downcase 
+    # puts "element name returned is #{element['title']}"
     
     id = element['href'].split("/")[3]
     
@@ -40,7 +40,7 @@ class WebService
     raise "id is not valid - does not contain numbers" if id[0..5].match(/^\d+$/).nil?
     
     company = {:name => element['title']}
-    company[:search_term] = search_term
+    # company[:search_term] = search_term
     company[:rank] = position
     company[:organization_number] =
       if id[6..9].match(/^\d+$/).nil?
@@ -51,5 +51,4 @@ class WebService
 
     return company
   end
-
 end

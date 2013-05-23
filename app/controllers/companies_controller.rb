@@ -1,12 +1,11 @@
 class CompaniesController < ApplicationController
-  # GET /companies
-  # GET /companies.json
-  def index
+  # GET /companies/search
+  # GET /companies/search.json
+  def search
     #TODO: check for input validation
     #TODO: write tests
     
-    # @companies = Company.all
-    @companies = Company.search(params[:search])
+    @companies = Company.search(params[:search_string])
 
     respond_to do |format|
       format.html # index.html.erb

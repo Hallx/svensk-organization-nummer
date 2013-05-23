@@ -24,7 +24,7 @@ class CompanyTest < ActiveSupport::TestCase
     
     assert_not_nil(companies)
     assert_not_nil(companies.first)
-    assert_equal("apoex ab", companies.first[:name].downcase!)
+    assert_equal("apoex ab", companies.first[:name].downcase)
   end
   
   test "search parameter is not in database and isnt valid on allabolag" do  
