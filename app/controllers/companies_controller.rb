@@ -7,16 +7,6 @@ class CompaniesController < ApplicationController
     
     # @companies = Company.all
     @companies = Company.search(params[:search])
-    # raise "invalid parameter" if params[:search].blank?
-#     
-    # @result = CachedResult.where(:search_term => params[:search]).first
-    # if @result.nil? || @result.created_at < 1.week.ago
-      # @companies = Company.search(params[:search])
-      # CachedResult.create(:search_term => params[:search], :result => @companies)
-    # else
-      # @companies = @result.result
-    # end
-    
 
     respond_to do |format|
       format.html # index.html.erb
