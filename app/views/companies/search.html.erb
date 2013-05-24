@@ -1,4 +1,4 @@
-<% unless (params[:search_string].empty?) %>
+<% unless (params[:search_string].nil?) %>
 	<h1>Listing companies for search <%=params[:search_string]%></h1>
 	
 	<table>

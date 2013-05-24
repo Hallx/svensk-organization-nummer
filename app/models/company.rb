@@ -1,7 +1,5 @@
 class Company
-
   def self.search(search_parameters)
-    #TODO: move to appropriate place
     return [] if search_parameters.blank?    
     search_parameters.downcase!
     
@@ -12,15 +10,5 @@ class Company
       cached_result = CachedResult.where(:search_term => search_parameters).first
     end
     return cached_result.result
-  end
-  
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
-  
-  def persisted?
-    false
   end
 end
