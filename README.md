@@ -1,14 +1,22 @@
-Svensk Organization Nummer Sok
-==============================
+Svensk Organization Nummer Sök
+------------------------------
+
 
 Find out organization numbers for Swedish companies. 
+
+
+
+####Description:
+
 
 This is a service that uses an external website scrapping to find out Swedish organization numbers for companies registered in Sweden.
  
 
 
-SET UP:
-=======
+
+
+####Set up:
+
 
 - You will need ruby 1.8.7, ruby gems, mysql and Bundler
 
@@ -24,8 +32,9 @@ SET UP:
 
 
 
-TODO:
-======
+
+
+####TODO:
 
 - a maintenance script to clean up cache regularly	
 
