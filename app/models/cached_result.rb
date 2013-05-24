@@ -10,7 +10,7 @@ class CachedResult < ActiveRecord::Base
     old_results.each { |x| x.destroy }
   end
   
-  #TODO: expire the cache
+  #TODO: expire the cache result if it's old
   # def delete_old_record
     # if self.created_at > (Time.now - 1.week)
       # self.destroy

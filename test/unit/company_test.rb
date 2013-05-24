@@ -3,7 +3,6 @@ require 'test_helper'
 class CompanyTest < ActiveSupport::TestCase
   
   test "search parameter is null" do
-    #TODO: remove later
     companies = Company.search(nil)
     
     assert_not_nil(companies)

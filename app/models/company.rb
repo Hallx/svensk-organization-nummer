@@ -1,6 +1,6 @@
 class Company
   def self.search(search_parameters)
-    return [] if search_parameters.blank?    
+    return [] if search_parameters.blank?
     search_parameters.downcase!
     
     cached_result = CachedResult.where(:search_term => search_parameters).first

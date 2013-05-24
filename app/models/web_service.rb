@@ -29,7 +29,6 @@ class WebService
         return nil
       end
     end
-    # puts "element name returned is #{element['title']}"
     
     id = element['href'].split("/")[3]
     

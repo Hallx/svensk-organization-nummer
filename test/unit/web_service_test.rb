@@ -20,5 +20,5 @@ class WebServiceTest < ActiveSupport::TestCase
   end
   
   
-  #TODO: mock up the result pages and test against it
+  #TODO: mock up the result pages from local storage and test against it
 end
