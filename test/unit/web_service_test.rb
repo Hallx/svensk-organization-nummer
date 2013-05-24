@@ -18,4 +18,7 @@ class WebServiceTest < ActiveSupport::TestCase
     companies = WebService.get_companies("kento it kentor ab")
     assert_equal(10, companies.size)
   end
+  
+  
+  #TODO: mock up the result pages and test against it
 end

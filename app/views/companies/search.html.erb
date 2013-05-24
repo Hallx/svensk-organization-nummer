@@ -5,16 +5,14 @@
 	  <tr>
 	    <th>Name</th>
 	    <th>Organization number</th>
-	    
-	    <th>search_term</th>
+	    <th></th>
 	  </tr>
 	
 	<% @companies.each do |company| %>
 	  <tr>
 	    <td><%= company[:name] %></td>
 	    <td><%= company[:organization_number] %></td>
-	    <td><%= company[:search_term] %></td>
-		<td><b><%= "perfect match" if (company[:name].downcase == params[:search_string].downcase) %></b></td>
+		<td><b><i><%= "perfect match" if (company[:name].downcase == params[:search_string].downcase) %></i></b></td>
 	  </tr>
 	<% end %>
 	</table>

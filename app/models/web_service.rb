@@ -17,8 +17,6 @@ class WebService
     # rescue
       # #TODO: some error handling
       # raise "error in parsing the search page"
-    # ensure
-      # return nil
     end
   end
   
@@ -40,7 +38,6 @@ class WebService
     raise "id is not valid - does not contain numbers" if id[0..5].match(/^\d+$/).nil?
     
     company = {:name => element['title']}
-    # company[:search_term] = search_term
     company[:rank] = position
     company[:organization_number] =
       if id[6..9].match(/^\d+$/).nil?
@@ -48,7 +45,6 @@ class WebService
       else
         "#{id[0..5]}-#{id[6..9]}"
       end
-
     return company
   end
 end

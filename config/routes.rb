@@ -1,7 +1,4 @@
 AllaBolag::Application.routes.draw do
-  
-  #TODO: more limited routing
-  # resources :companies
 
   match 'companies/search' => 'companies#search'
 

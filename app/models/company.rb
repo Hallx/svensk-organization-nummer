@@ -1,14 +1,4 @@
-#TODO: split models into search and company
-
 class Company
-  # include ActiveModel::Validations
-  # include ActiveModel::Conversion
-  # extend ActiveModel::Naming
-
-  #TODO: add rankings of results
-  # attr_accessor :name, :organization_number, :search_term, :rank
-  # validates :name, :presence => true
-  # validates :organization_number, :format => {:with => /^\d{6}\-[X\d]{4}$/}
 
   def self.search(search_parameters)
     #TODO: move to appropriate place
