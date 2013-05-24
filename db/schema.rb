@@ -19,20 +19,4 @@ ActiveRecord::Schema.define(:version => 20130523083540) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "companies", :force => true do |t|
-    t.string   "name"
-    t.string   "organization_number"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.string   "search_term"
-  end
-
-  create_table "searches", :force => true do |t|
-    t.string   "term"
-    t.integer  "rank"
-    t.integer  "company_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
 end
