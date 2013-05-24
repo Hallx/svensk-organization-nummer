@@ -24,6 +24,8 @@ This is a service that uses an external website scrapping to find out Swedish or
 
 - A simple 'bundle install' command will resolve all the dependencies for this project
 
+- Change 'config/database.yml' file according to your database credentials and settings
+
 - 'rake db:create' and 'rake db:migrate' would help setup the databases
 
 - 'rake test' would ensure that everything is properly set up and you are good to go
